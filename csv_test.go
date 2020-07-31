@@ -32,8 +32,9 @@ func TestTranslation(t *testing.T) {
 	//newChunk generates 1 record -- 1 metric for genny
 	iter := ReadChunks(ctx, file)
 	//fmt.Println("iter is",iter)
-	out := &bytes.Buffer{}
-	err := WriteCSV(ctx, iter, out)
+	//out := &bytes.Buffer{}
+	err := WriteCSV(ctx, iter, os.Stdout)
+	//err := DumpCSV(ctx, iter, hello.csv)
 	//err := partitionWindow(iter)
 	//io.Copy(os.Stdout,out)
 	require.NoError(t, err)

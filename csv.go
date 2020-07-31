@@ -20,7 +20,7 @@ func (c *Chunk) getFieldNames() []string {
 	for idx, m := range c.Metrics {
 		fieldNames[idx] = m.Key()
 	}
-	fmt.Println("Field names are", fieldNames)
+
 	return fieldNames
 }
 
@@ -133,7 +133,10 @@ func partitionWindow(startValue *int64,windows*[][]string,record[] string) []str
 		strArr=append(strArr,strconv.FormatInt(throughputBytes,10))
 		strArr=append(strArr,strconv.FormatInt(avgDur,10))
 		strArr=append(strArr,strconv.FormatInt(avgTotal,10))*/
-		strArr=[]string{strconv.FormatInt(throughputOps,10),strconv.FormatInt(throughputBytes,10),strconv.FormatInt(avgDur,10),strconv.FormatInt(avgTotal,10)}
+		startTimestamp,err:=strconv.ParseInt(dref[0][0],10,64)
+		unixTimestamp:= time.Unix(startTimestamp/100, 0).Format(time.RFC3339)
+
+		strArr=[]string{unixTimestamp,strconv.FormatInt(throughputOps,10),strconv.FormatInt(throughputBytes,10),strconv.FormatInt(avgDur,10),strconv.FormatInt(avgTotal,10)}
 		//fmt.Println("strArr is",strArr)
 		//encodeData:=""+strconv.FormatInt(throughputOps,10)+","+strconv.FormatInt(throughputBytes,10)+","+strconv.FormatInt(avgDur,10)+strconv.FormatInt(avgTotal,10)+""
 		//compress and encode
