@@ -5,7 +5,6 @@ import (
 	"context"
 	"encoding/csv"
 	"io/ioutil"
-	"log"
 	"os"
 	"path/filepath"
 	"strings"
@@ -17,29 +16,9 @@ import (
 	"github.com/stretchr/testify/require"
 )
 
-//my function
 
-func TestTranslation(t *testing.T) {
-	ctx, cancel := context.WithCancel(context.Background())
-	defer cancel()
 
-	file, e := os.Open("/Users/niharika.pujar/project_work/genny/build/genny-metrics/InsertRemoveTest.Insert.ftdc")
 
-	if e!= nil {
-		log.Fatalf("failed opening file: %s", e)
-	}
-	//call WriteCSV here
-	//newChunk generates 1 record -- 1 metric for genny
-	iter := ReadChunks(ctx, file)
-	//fmt.Println("iter is",iter)
-	//out := &bytes.Buffer{}
-	err := WriteCSV(ctx, iter, os.Stdout)
-	//err := DumpCSV(ctx, iter, hello.csv)
-	//err := partitionWindow(iter)
-	//io.Copy(os.Stdout,out)
-	require.NoError(t, err)
-
-} //end of TestTranslation
 func TestWriteCSVIntegration(t *testing.T) {
 	ctx, cancel := context.WithCancel(context.Background())
 	defer cancel()
